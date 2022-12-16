@@ -20,13 +20,14 @@ def cash_calc():
     cash_calculator = CashCalculator(1000)
     cash_calculator.add_record(Record(amount=150, comment='Перевод денег'))
     cash_calculator.add_record(Record(amount=500, comment='Заправка маш'))
-    return cash_calculator.get_today_cash_remained()
+    return cash_calculator.get_today_cash_remained('rub')
 
 
 def test_cashCalc(cash_calc):
-    assert cash_calc == 'Денег осталось (Валюта: Руб)'
+    assert cash_calc == 'На сегодня осталось 350.0 руб'
 
 
 def test_CalCalc(cal_calc):
     
-    assert cal_calc == 'Калорий осталось: 2050.'
+    assert cal_calc == (f'Сегодня можно съесть что-нибудь ещё, но с общей '
+                       f'калорийностью не более 2050 кКал')
