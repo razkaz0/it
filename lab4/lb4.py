@@ -1,5 +1,7 @@
 import pytest
-from lb3 import Record, CashCalculator, CaloriesCalculator
+import sys
+sys.path.append('../lab3')
+from lab3 import Record, CashCalculator, CaloriesCalculator
 
 
 @pytest.fixture()
@@ -7,17 +9,17 @@ def cal_calc():
     limit = 2500
     calories_calculator = CaloriesCalculator(limit)
     calories_calculator.add_record(
-        Record(amount=1337, comment='Ice cream'))
+        Record(amount=300, comment='Мороженное'))
     calories_calculator.add_record(
-        Record(amount=444, comment='Chocolate milk', ))
+        Record(amount=150, comment='Хот-дог', ))
     return calories_calculator.get_calories_remained()
 
 
 @pytest.fixture()
 def cash_calc():
-    cash_calculator = CashCalculator(500)
-    cash_calculator.add_record(Record(amount=888, comment='Infinity Carbonara'))
-    cash_calculator.add_record(Record(amount=777, comment='Jakpot Rice'))
+    cash_calculator = CashCalculator(1000)
+    cash_calculator.add_record(Record(amount=150, comment='Перевод денег'))
+    cash_calculator.add_record(Record(amount=500, comment='Заправка маш'))
     return cash_calculator.get_today_cash_remained()
 
 
@@ -26,4 +28,5 @@ def test_cashCalc(cash_calc):
 
 
 def test_CalCalc(cal_calc):
-    assert cal_calc == 'Калорий осталось: 233.'
+    
+    assert cal_calc == 'Калорий осталось: 2050.'

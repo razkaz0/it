@@ -95,6 +95,6 @@ print(cash_calculator.get_today_cash_remained('rub'))
 limit = 2500
 calories_calculator = CaloriesCalculator(limit)
 calories_calculator.add_record(
-    Record(amount=300, comment='обед во вкусно и точка',))
+ Record(amount=300, comment='обед во вкусно и точка',))
 calories_calculator.add_record(Record(amount=200, comment='кофе с пончиком',))
 print(calories_calculator.get_today_stats())
