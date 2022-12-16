@@ -17,14 +17,13 @@ class Calculator:
     def __init__(self, limit):
         self.limit = limit
         self.records = []
-        self.today = None
-        self.week_ago = None
+        self.today = dt.date.today()
+        self.week_ago = self.today - dt.timedelta(7)
 
     def add_record(self, record):
         self.records.append(record)
 
     def get_today_stats(self):
-        self.update_dates()
         day_stats = []
         for record in self.records:
             if record.date == self.today:
@@ -32,7 +31,6 @@ class Calculator:
         return sum(day_stats)
 
     def get_week_stats(self):
-        self.update_dates()
         week_stats = []
         for record in self.records:
             if self.week_ago <= record.date <= self.today:
@@ -42,10 +40,6 @@ class Calculator:
     def get_today_limit_balance(self):
         limit_balance = self.limit - self.get_today_stats()
         return limit_balance
-
-    def update_dates(self):
-        self.today = dt.date.today()
-        self.week_ago = self.today - dt.timedelta(7)
 
 
 class CaloriesCalculator(Calculator):
@@ -80,21 +74,15 @@ class CashCalculator(Calculator):
             message = f'На сегодня осталось {cash_remained} {name}'
         else:
             cash_remained = abs(cash_remained)
-            message = (
-                f'Денег нет, держись: твой долг -{cash_remained} 'f'{name}')
+            message = (f'Денег нет, держись: твой долг -{cash_remained} 'f'{name}')
         return message
-
-
 cash_calculator = CashCalculator(1000)
-cash_calculator.add_record(Record(amount=145, comment='кофе',))
-cash_calculator.add_record(
-    Record(amount=300, comment='Серёге за обед', date='08.11.2019'))
-cash_calculator.add_record(
-    Record(amount=3000, comment='бар в Танин др', date='25.10.2022'))
+cash_calculator.add_record(Record(amount=145, comment='кофе',)) 
+cash_calculator.add_record(Record(amount=300, comment='Серёге за обед', date='08.11.2019')) 
+cash_calculator.add_record(Record(amount=3000, comment='бар в Танин др', date='25.10.2022')) 
 print(cash_calculator.get_today_cash_remained('rub'))
 limit = 2500
 calories_calculator = CaloriesCalculator(limit)
-calories_calculator.add_record(
-    Record(amount=300, comment='обед во вкусно и точка',))
-calories_calculator.add_record(Record(amount=200, comment='кофе с пончиком',))
+calories_calculator.add_record(Record(amount=300, comment='обед во вкусно и точка',)) 
+calories_calculator.add_record(Record(amount=200, comment='кофе с пончиком',)) 
 print(calories_calculator.get_today_stats())
