@@ -19,7 +19,7 @@ def cal_calc():
 def cash_calc():
     cash_calculator = CashCalculator(1000)
     cash_calculator.add_record(Record(amount=150, comment='Перевод денег'))
-    cash_calculator.add_record(Record(amount=500, comment='Заправка маш'))
+    cash_calculator.add_record(Record(amount=500, comment='Заправка машины'))
     return cash_calculator.get_today_cash_remained('rub')
 
 
